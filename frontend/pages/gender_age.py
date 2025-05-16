@@ -53,7 +53,4 @@ def gender_graph():
     )
 
 
-    return {
-        "content": "## Gender Graph\n<|{fig}|chart|height=700px|>",
-        "fig": fig
-    }
+    return fig
