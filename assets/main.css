@@ -1,0 +1,30 @@
+@import "variables.css";
+@import "layout_primitives.css";
+
+h1,
+h2,
+h3,
+p {
+  color: var(--primaryColor);
+}
+
+h1 {
+  font-size: var(--s2);
+}
+
+h2 {
+  font-size: var(--s1);
+}
+
+p {
+  font-size: var(--s0);
+}
+
+/* .button-color {
+    background-color: tomato;
+    color: whitesmoke;
+}
+
+.left-margin-md {
+    margin-left: var(--s0);
+} */

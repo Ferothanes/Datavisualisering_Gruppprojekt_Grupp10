@@ -1,0 +1,26 @@
+:root {
+  /* Set a modular scale ratio (each step is 1.5x or 1/1.5 the size of the next/previous) */
+  --ratio: 1.5;
+
+  /* Define smaller spacing sizes by dividing downward using the ratio */
+  --s-5: calc(var(--s-4) / var(--ratio));  /* Very small spacing */
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));   /* Small spacing */
+
+  /* Base spacing unit */
+  --s0: 1em;  /* Medium spacing — base unit */
+
+  /* Define larger spacing sizes by multiplying upward using the ratio */
+  --s1: calc(var(--s0) * var(--ratio));    /* Large spacing */
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));    /* Very large spacing */
+
+  /* Theme colors */
+  --primaryColor: #050505;                 /* Main text or accent color */
+  --backgroundColor: #fafafa;              /* Page background color */
+  --backgroundColorSecondary: #ebebeb;     /* Secondary background (e.g. cards, sections) */
+}
