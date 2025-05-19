@@ -1,7 +1,8 @@
 # Gender_graph.py
-
+import taipy.gui.builder as tgb
 import pandas as pd
 import plotly.express as px
+
 
 def gender_graph():
     df = pd.read_excel("data/Utbildningsansökning_age.xlsx", sheet_name='Education')
@@ -52,5 +53,16 @@ def gender_graph():
         hoverlabel=dict(font=dict(color='white', size=15), bgcolor='darkblue', bordercolor='black')
     )
 
-
     return fig
+
+
+gender_chart = gender_graph()  # Call the function and get the dict
+
+with tgb.Page() as gender_age: #page_name
+    with tgb.part(class_name="container card stack-large"):
+        tgb.text("# MYH dashboard 2023-2024", mode="md")
+        with tgb.layout(columns="2 1"):
+            # Display the gender chart using the content returned
+            with tgb.part(class_name="card"):
+                tgb.chart(figure = '{gender_chart}')
+
