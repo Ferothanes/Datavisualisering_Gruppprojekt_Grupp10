@@ -1,24 +1,12 @@
 import taipy.gui.builder as tgb
 from taipy.gui import Gui
-#from Gender_graph.gender_graph import gender_graph
-from frontend.charts import gender_graph
+from frontend.pages.gender_age import gender_age
 
-# IF WE WANT PAGES
 #pages = {"home": home_page, "dashboard": dashboard_page, "data": data_page}
+pages = {"gender_age": gender_age}
 
-gender_chart = gender_graph()  # Call the function and get the dict
-
-with tgb.Page() as page:
-    with tgb.part(class_name="container card stack-large"):
-        tgb.text("# MYH dashboard 2023-2024", mode="md")
-        with tgb.layout(columns="2 1"):
- 
-            # Display the gender chart using the content returned
-            with tgb.part(class_name="card"):
-                tgb.text(gender_chart["content"], mode="md")
 
 if __name__ == "__main__":
-    Gui(page).run(dark_mode=False, use_reloader=True, port=8080)
-    
+    Gui(pages=pages).run(dark_mode=False, use_reloader=True, port=8080) #pages = pages 
 #css_file="assets/main.css
 
