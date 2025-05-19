@@ -1,0 +1,41 @@
+.center-text {
+    text-align: center;
+}
+
+.red-text {
+    color: red; /* Röd text */
+}
+
+.blue-text {
+    color: blue; /* Blå text */
+}
+
+.green-text {
+    color: green; /* Grön text */
+}
+
+
+
+.text-block {
+    display: flex;
+    flex-direction: column;  /* Staplar texten vertikalt */
+    align-items: center;  /* Centrerar innehållet */
+    gap: 5px;  /* Skapar mellanrum mellan rubrik och värde */
+}
+
+.bold-italic {
+    font-weight: bold;   /* Gör texten fet */
+    font-style: italic;  /* Gör texten kursiv */
+    font-family: 'Arial', sans-serif; /* Ändra font, du kan testa andra som 'Verdana' eller 'Roboto' */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column; /* Staplar texten vertikalt */
+    align-items: center; /* Centrerar texten */
+}
+.text-row {
+    display: flex;
+    justify-content: space-between; /* Håller huvuddelarna på samma rad */
+    gap: 30px;
+}
