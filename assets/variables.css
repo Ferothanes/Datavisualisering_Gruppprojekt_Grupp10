@@ -1,0 +1,14 @@
+.stack-small > * + * {
+  /* Adds small vertical space between child elements (except the first) */
+  margin-top: var(--s-1);
+}
+
+.stack > * + * {
+  /* Adds medium vertical space between child elements (except the first) */
+  margin-top: var(--s0);
+}
+
+.stack-large > * + * {
+  /* Adds large vertical space between child elements (except the first) */
+  margin-top: var(--s1);
+}
