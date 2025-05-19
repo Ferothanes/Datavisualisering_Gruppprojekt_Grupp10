@@ -2,9 +2,10 @@ import taipy.gui.builder as tgb
 from taipy.gui import Gui
 from frontend.pages.gender_age import gender_age
 from frontend.pages.utbildningsomrade import utbildningsomrade
+from frontend.pages.statistikansökningar import ansökningar
 
 #pages = {"home": home_page, "dashboard": dashboard_page, "data": data_page}
-pages = {"Overview": gender_age, "Utbildningsområde": utbildningsomrade}
+pages = {"Overview": gender_age, "Utbildningsområde": utbildningsomrade, "statistikansökningar": ansökningar,}
 
 
 if __name__ == "__main__":
