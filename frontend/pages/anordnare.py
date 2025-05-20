@@ -1,5 +1,5 @@
 import taipy.gui.builder as tgb
-from backend.data_processing import df_an, get_anordnare
+from backend.backend_anordnare import df_an, get_anordnare, update_kpi, count_beslut
 
 # -- Startvärden
 selected_anordnare = df_an["Utbildningsanordnare administrativ enhet"].dropna().astype(str).unique()[0]
@@ -8,36 +8,9 @@ selected_year_str = str(selected_year)
 selected_year_lov = sorted([int(y) for y in df_an["År"].unique()], reverse=True)
 
 poäng, kommuner, län, huvudmannatyp = get_anordnare(df_an, selected_anordnare, selected_year)
+beviljade, ej_beviljade = count_beslut(df_an, selected_anordnare, selected_year)
 
-
-def update_kpi(state):
-    print("Vald anordnare:", state.selected_anordnare)
-
-    år_för_anordnare = df_an[
-        df_an["Utbildningsanordnare administrativ enhet"] == state.selected_anordnare
-    ]["År"].unique()
-
-    år_för_anordnare = sorted([int(år) for år in år_för_anordnare], reverse=True)
-    print("Tillgängliga år för anordnaren:", år_för_anordnare)
-
-    # Uppdatera årens lov
-    state.selected_year_lov = år_för_anordnare
-
-    # Om nuvarande år inte finns, byt till första tillgängliga
-    if state.selected_year not in år_för_anordnare:
-        state.selected_year = år_för_anordnare[0]
-
-    poäng, kommuner, län, huvudmannatyp = get_anordnare(
-        df_an, state.selected_anordnare, state.selected_year
-    )
-
-    state.poäng = poäng
-    state.kommuner = kommuner
-    state.län = län
-    state.selected_year_str = str(state.selected_year)
-    state.huvudmannatyp = huvudmannatyp
-
-
+# -- GUI-sida
 with tgb.Page() as page:
     with tgb.part(class_name="card"):
         tgb.text("## Filtrera utbildningsanordnare", mode="md")
@@ -45,7 +18,7 @@ with tgb.Page() as page:
         tgb.selector(
             "Anordnare",
             value="{selected_anordnare}",
-            lov = sorted(df_an["Utbildningsanordnare administrativ enhet"].dropna().astype(str).unique()),
+            lov=sorted(df_an["Utbildningsanordnare administrativ enhet"].dropna().astype(str).unique()),
             dropdown=True,
         )
 
@@ -58,13 +31,16 @@ with tgb.Page() as page:
 
         tgb.button("Visa statistik", on_action=update_kpi)
 
-    tgb.text("### KPI:er för {selected_anordnare} - år      {selected_year_str}", mode="md")
+    tgb.text("### KPI:er för {selected_anordnare} - år {selected_year_str}", mode="md")
+    with tgb.part(class_name="centered"):
+        with tgb.layout(columns="1 1 1"):
+            tgb.text("{poäng} Beviljade poäng", class_name="kpi")
+            tgb.text("För {kommuner} Kommuner i {län} Län", class_name="kpi")
+            tgb.text("Ägartyp: {huvudmannatyp}", class_name="kpi")
 
-    with tgb.layout(columns="1 1 1"):
-        tgb.text("{poäng} Beviljade poäng", class_name="kpi")
-        tgb.text("För {kommuner} Kommuner i {län} Län", class_name="kpi")
-        tgb.text("Ägartyp: {huvudmannatyp}", class_name="kpi")
-        
+        with tgb.layout(columns="1 1"):
+            tgb.text("{beviljade} Beviljade ansökningar", class_name="kpi")
+            tgb.text("{ej_beviljade} Ej beviljade ansökningar", class_name="kpi")
 
 
 if __name__ == "__main__":
@@ -80,7 +56,9 @@ if __name__ == "__main__":
             "poäng": poäng,
             "kommuner": kommuner,
             "län": län,
-            "huvudmannatyp": huvudmannatyp
+            "huvudmannatyp": huvudmannatyp,
+            "beviljade": beviljade,
+            "ej_beviljade": ej_beviljade,
 
         }
     )
