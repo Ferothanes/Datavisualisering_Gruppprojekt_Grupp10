@@ -20,7 +20,7 @@
   --s5: calc(var(--s4) * var(--ratio));    /* Very large spacing */
 
   /* Theme colors */
-  --primaryColor: #050505;                 /* Main text or accent color */
+  --primaryColor: #02023f;                 /* Main text or accent color */
   --backgroundColor: #fafafa;              /* Page background color */
   --backgroundColorSecondary: #ebebeb;     /* Secondary background (e.g. cards, sections) */
 }
