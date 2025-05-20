@@ -58,7 +58,7 @@ student_area_graph = student_area_graph()
 
 with tgb.Page() as utbildningsomrade: #page_name
     with tgb.part(class_name="container card stack-large"):
-        tgb.navbar()
+        tgb.navbar(rebuild = True)
         tgb.text("# Studerande i YH – utveckling över tid", mode="md")
         with tgb.layout(columns="2 1"):
             # Display the gender chart using the content returned
