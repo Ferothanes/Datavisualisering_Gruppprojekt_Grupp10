@@ -3,17 +3,15 @@ import pandas as pd
 import plotly.express as px
 
 def student_area_graph():
-    # Load the data
     df = pd.read_excel("data/Antalet studerande i YH inom olika utbildningsområden 2012-2024.xlsx")
 
-    # Drop unwanted columns if they exist
+    # Drop unwanted columns (if they exist)
     columns_to_exclude = ['Totalt', 'Övrigt']
     df = df.drop(columns=[col for col in columns_to_exclude if col in df.columns])
-
     # Melt the data to long format
     df_long = df.melt(id_vars='År', var_name='Utbildningsområde', value_name='Antal studerande')
 
-    # Create area chart
+
     fig = px.line(
         df_long,
         x='År',
@@ -24,11 +22,11 @@ def student_area_graph():
         template='plotly_white'
     )
 
-    # Add markers (circles) to all visible and hidden traces
+    # Add markers (circles) 
     for trace in fig.data:
         trace.mode = "lines+markers"
 
-    # Hide all traces except "Data/It"
+    # Hide all except "Data/It"
     for trace in fig.data:
         if trace.name != "Data/It":
             trace.visible = "legendonly"
@@ -55,15 +53,13 @@ def student_area_graph():
 
 
 
-#tgb.chart(figure=student_area_graph())
-
 
 student_area_graph = student_area_graph()
 
 with tgb.Page() as utbildningsomrade: #page_name
     with tgb.part(class_name="container card stack-large"):
         tgb.navbar()
-        tgb.text("# MYH dashboard 2023-2024", mode="md")
+        tgb.text("# Studerande i YH – utveckling över tid", mode="md")
         with tgb.layout(columns="2 1"):
             # Display the gender chart using the content returned
             with tgb.part(class_name="card"):
