@@ -26,7 +26,7 @@ def get_anordnare(df, anordnare, år):
 
     return poäng, kommuner, län, huvudmannatyp
 
-#------------------------
+#------------------------ Hämta/uppdatera KPI-data baserat på val 
 def update_kpi(state):
     print("Vald anordnare:", state.selected_anordnare)
 
@@ -52,9 +52,20 @@ def update_kpi(state):
     state.selected_year_str = str(state.selected_year)
     state.huvudmannatyp = huvudmannatyp
 
+    #-- Beviljade ansökningar
     beviljade, ej_beviljade = count_beslut(df_an, state.selected_anordnare, state.selected_year)
     state.beviljade = beviljade
     state.ej_beviljade = ej_beviljade
+    #-- Utbildningsområden 
+    utbildningsområden = get_utbildningsområden(df_an, state.selected_anordnare, state.selected_year)
+    state.utbildningsområden = utbildningsområden
+    state.utbildningsområden_text = ", ".join(utbildningsområden)
+    #-- Procent andel av sökta
+    total = beviljade + ej_beviljade
+    if total > 0:
+        state.beviljandegrad = round(beviljade / total * 100, 1)
+    else:
+        state.beviljandegrad = 0.0
 
 
 #-----Räkna beslut 
@@ -70,3 +81,13 @@ def count_beslut(df, anordnare, år):
     ej_beviljade = beslut_counts.get("Ej beviljad", 0)
     return beviljade, ej_beviljade
 
+
+#-------- Få ut utbildningsområden
+
+def get_utbildningsområden(df, anordnare, år):
+    df_filtered = df[
+        (df["Utbildningsanordnare administrativ enhet"] == anordnare) &
+        (df["År"] == år) &
+        (df["Beslut"] == "Beviljad")
+    ]
+    return sorted(df_filtered["Utbildningsområde"].dropna().unique().tolist())
