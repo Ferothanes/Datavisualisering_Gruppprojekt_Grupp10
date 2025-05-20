@@ -1,6 +1,6 @@
 import taipy.gui.builder as tgb
 from taipy.gui import Gui
-from frontend.pages.gender_age import gender_age
+from frontend.pages.Overview import gender_age
 from frontend.pages.utbildningsomrade import utbildningsomrade
 
 #pages = {"home": home_page, "dashboard": dashboard_page, "data": data_page}
