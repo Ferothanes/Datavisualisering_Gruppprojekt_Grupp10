@@ -1,4 +1,3 @@
-# Gender_graph.py
 import taipy.gui.builder as tgb
 import pandas as pd
 import plotly.express as px
@@ -55,14 +54,46 @@ def gender_graph():
 
     return fig
 
+#Age graph---------------------------
+
+def age_graph():
+    # Read the data
+    df = pd.read_excel("data/Utbildningsansökning_age.xlsx", sheet_name="Age")
+    df.columns = df.columns.str.strip()  # Remove any leading/trailing spaces in column names
+
+    # Reshape data for grouped bar chart
+    df_melted = df.melt(
+        id_vars=["Age groups"],
+        value_vars=["Women", "Men"],
+        var_name="Gender",
+        value_name="Applications"
+    )
+
+    # Create grouped bar chart
+    fig = px.bar(
+        df_melted,
+        x="Age groups",
+        y="Applications",
+        color="Gender",
+        barmode="group",
+        title="Utbildningsansökningar 2024: Kvinnor vs. Män per åldersgrupp",
+        labels={"Applications": "Antal ansökningar"}
+    )
+
+    return fig  # Return the figure instead of showing it
+
+
 
 gender_chart = gender_graph()  # Call the function and get the dict
+age_graph = age_graph()
 
 with tgb.Page() as gender_age: #page_name
     with tgb.part(class_name="container card stack-large"):
+        tgb.navbar()
         tgb.text("# MYH dashboard 2023-2024", mode="md")
         with tgb.layout(columns="2 1"):
             # Display the gender chart using the content returned
             with tgb.part(class_name="card"):
                 tgb.chart(figure = '{gender_chart}')
+                tgb.chart(figure = '{age_graph}')
 
