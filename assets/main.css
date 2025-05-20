@@ -1,4 +1,4 @@
-@import "variables.css";
+/*@import "variables.css";*/
 @import "layout_primitives.css";
 @import "styles.css";
 
@@ -21,11 +21,24 @@ p {
   font-size: var(--s0);
 }
 
-/* .button-color {
-    background-color: tomato;
-    color: whitesmoke;
+
+/* Make the outer container stretch full width */
+.overview-page.container {
+  /*max-width: 100% !important;*/
+  width: 70%;
+  box-sizing: border-box;
 }
 
-.left-margin-md {
-    margin-left: var(--s0);
-} */
+/* Make the card inside it also fill the full width */
+.overview-page .card {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* .taipy-text h1 {color: tomato;} */
+
+.overview-page .plot-container {
+  width: 50%;
+
+}
+

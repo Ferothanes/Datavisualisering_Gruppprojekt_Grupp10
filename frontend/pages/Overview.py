@@ -34,19 +34,16 @@ def gender_graph():
         color='Gender',
         barmode='overlay',
         orientation='h',
-        title='Men vs Women Applicants per Education Field (2023 & 2024) - Top 10',
         color_discrete_map={'Women': 'lightblue', 'Men': 'grey'}
     )
 
     fig.update_layout(
-        height=700,
+        height=600,
         xaxis_title='',
         yaxis_title='',
         legend_title='Gender',
-        paper_bgcolor='white',
-        plot_bgcolor='white',
-        title=dict(text='Men vs Women Applicants per Education Field (2023 & 2024) - Top 10',
-                   font=dict(color='#334850', size=20)),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(showline=True, linewidth=1, linecolor='black', ticks='outside'),
         yaxis=dict(tickfont=dict(color='#334850', size=13)),
         hoverlabel=dict(font=dict(color='white', size=15), bgcolor='darkblue', bordercolor='black')
@@ -76,8 +73,13 @@ def age_graph():
         y="Applications",
         color="Gender",
         barmode="group",
-        title="Utbildningsansökningar 2024: Kvinnor vs. Män per åldersgrupp",
-        labels={"Applications": "Antal ansökningar"}
+        labels={"Applications": "Antal ansökningar"},
+        color_discrete_map={"Women": "lightblue", "Men": "grey"}
+    )
+
+    fig.update_layout(
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)'
     )
 
     return fig  # Return the figure instead of showing it
@@ -87,13 +89,31 @@ def age_graph():
 gender_chart = gender_graph()  # Call the function and get the dict
 age_graph = age_graph()
 
-with tgb.Page() as gender_age: #page_name
-    with tgb.part(class_name="container card stack-large"):
-        tgb.navbar()
-        tgb.text("# Demografisk översikt: Kön och ålder", mode="md")
-        with tgb.layout(columns="2 1"):
-            # Display the gender chart using the content returned
-            with tgb.part(class_name="card"):
-                tgb.chart(figure = '{gender_chart}')
-                tgb.chart(figure = '{age_graph}')
+# with tgb.Page() as gender_age: #page_name
+#     with tgb.part(class_name="container card stack-large overview-page"):
+#         tgb.navbar()
+#         tgb.text("# Demografisk översikt: Kön och ålder", mode="md")
+#         with tgb.layout(columns="2 1"):
+#             with tgb.part(class_name="card"):
+#                 tgb.chart(figure = '{gender_chart}')
+#                 tgb.chart(figure = '{age_graph}')
 
+
+with tgb.Page() as gender_age:  # page_name
+    with tgb.part(class_name="container card stack-large overview-page"):
+        tgb.navbar()
+
+        tgb.text("## Demografisk översikt: Kön och ålder", mode="md")
+        with tgb.part(class_name="card"):
+            tgb.text(
+                "## Men vs Women Applicants per Education Field (2023 & 2024) - Top 10", mode="md")
+            tgb.chart(figure='{gender_chart}')
+
+        with tgb.part(class_name="card"):
+            tgb.text(
+                "## Utbildningsansökningar 2024: Kvinnor vs. Män per åldersgrupp\n"
+                "Detta diagram visar könsfördelningen bland utbildningsansökningar uppdelat på olika åldersgrupper.\n"
+                "X-axeln representerar de olika åldersgrupperna, medan Y-axeln visar antal inkomna ansökningar.\n"
+                "Färgerna visualiserar kön: **ljusblå för kvinnor** och **grå för män**.",
+                mode="md")
+            tgb.chart(figure='{age_graph}')

@@ -17,7 +17,6 @@ def student_area_graph():
         x='År',
         y='Antal studerande',
         color='Utbildningsområde',
-        title='Antalet studerande i YH inom olika utbildningsområden (2012–2024)',
         labels={'År': 'År', 'Antal studerande': 'Antal studerande'},
         template='plotly_white'
     )
@@ -52,15 +51,13 @@ def student_area_graph():
     return fig
 
 
-
-
 student_area_graph = student_area_graph()
 
 with tgb.Page() as utbildningsomrade: #page_name
-    with tgb.part(class_name="container card stack-large"):
+    with tgb.part(class_name="container card stack-large overview-page"):
         tgb.navbar()
-        tgb.text("# Studerande i YH – utveckling över tid", mode="md")
-        with tgb.layout(columns="2 1"):
-            # Display the gender chart using the content returned
-            with tgb.part(class_name="card"):
-                tgb.chart(figure = '{student_area_graph}')
+
+        tgb.text("## Studerande i YH – utveckling över tid \n"
+        "Antalet studerande i YH inom olika utbildningsområden (2012–2024).", mode="md")
+        with tgb.part(class_name="card"):
+            tgb.chart(figure = '{student_area_graph}')
