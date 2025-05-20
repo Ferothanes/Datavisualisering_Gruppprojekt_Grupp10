@@ -82,7 +82,7 @@ def update_year(state):
 
 with tgb.Page() as ansökningar:
     with tgb.part(class_name="container card"):
-        tgb.navbar(rebuild = True)
+        tgb.navbar()
         with tgb.part(class_name="card"):
             tgb.text(
                 "# MYH dashboard",
