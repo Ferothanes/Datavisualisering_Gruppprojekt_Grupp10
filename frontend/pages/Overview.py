@@ -89,7 +89,7 @@ age_graph = age_graph()
 
 with tgb.Page() as gender_age: #page_name
     with tgb.part(class_name="container card stack-large"):
-        tgb.navbar(rebuild = True)
+        tgb.navbar()
         tgb.text("# Demografisk översikt: Kön och ålder", mode="md")
         with tgb.layout(columns="2 1"):
             # Display the gender chart using the content returned
