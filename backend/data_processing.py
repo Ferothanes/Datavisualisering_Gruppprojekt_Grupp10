@@ -10,7 +10,7 @@ from utils.constants import DATA_DIRECTORY
 
 df = pd.read_excel(
     DATA_DIRECTORY / "Utbildningsansökning_age.xlsx",
-    sheet_name="Education"
+    sheet_name="education"
 )
 
 df_an = pd.read_excel(
@@ -32,8 +32,3 @@ def get_anordnare(df, anordnare, år):
     huvudmannatyp = df_filtered["Huvudmannatyp"].iloc[0] if not df_filtered.empty else "Okänd"
 
     return poäng, kommuner, län, huvudmannatyp
-
-# add new paths? 
-# df = pd.read_excel(
-#     DATA_DIRECTORY / "new data????"
-# )
