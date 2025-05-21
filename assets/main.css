@@ -1,13 +1,6 @@
-/*@import "variables.css";*/
 @import "layout_primitives.css";
 @import "styles.css";
 
-h1,
-h2,
-h3,
-p {
-  color: var(--primaryColor);
-}
 
 h1 {
   font-size: var(--s2);
@@ -22,7 +15,6 @@ p {
 }
 
 
-/* Make the outer container stretch full width */
 .overview-page.container {
   /*max-width: 100% !important;*/
   width: 70%;
@@ -40,5 +32,28 @@ p {
 .overview-page .plot-container {
   width: 50%;
 
+}
+
+/* .overview-page .taipy-text{
+  text-align:center
+}  */
+
+
+.home-page .taipy-image {
+  position: absolute;
+  top: 0;
+  right: 20%;  /* Moves it 15% away from the right edge */
+  margin: 1rem; /* spacing */
+}
+
+
+/* NAVBAR CSS */
+.MuiTabs-flexContainer button.Mui-selected {
+  color: #51abcb; /* text color for active tab */
+  /* background-color: white; background color for active tab */
+  border-radius: 5px;
+}
+.MuiTabs-indicator {
+  background-color: #51abcb;
 }
 

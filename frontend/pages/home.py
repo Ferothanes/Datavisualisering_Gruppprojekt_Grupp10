@@ -1,14 +1,15 @@
 import taipy.gui.builder as tgb
 
 with tgb.Page() as home_page:
-    with tgb.part(class_name="container card stack-large"):
+    with tgb.part(class_name="container card stack-large home-page"):
         tgb.navbar()
+        tgb.image("assets/images/logo.png", width="200px") 
 
         with tgb.part(class_name="max-text-width"):
-            tgb.text("# Skool´s YH dashboard", mode="md")
 
+            tgb.text("# Skool´s YH dashboard", mode="md")
             tgb.text(
-                """
+"""
 Här kommer du finna filtreringsbar information om beviljade kurser, program, utbildningsområden, statliga bidragsnivåer med mera.
 
 ---
@@ -24,6 +25,6 @@ Detta interaktiva verktyg ger en tydlig överblick över yrkeshögskoleutbildnin
 - Visualisera trender och ansökningsdata för både program och kurser.  
 - Möjliggöra filtrering på utbildningsanordnare, geografiska områden och utbildningstyper.  
 - Ge en helhetsbild av hur utbildningar är förankrade i arbetslivet och hur statsbidrag fördelas.
-                """,
-                mode="md"
+""",
+mode="md"
             )
