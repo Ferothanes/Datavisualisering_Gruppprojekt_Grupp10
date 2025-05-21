@@ -46,7 +46,7 @@ def gender_graph():
         plot_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(showline=True, linewidth=1, linecolor='black', ticks='outside'),
         yaxis=dict(tickfont=dict(color='#334850', size=13)),
-        hoverlabel=dict(font=dict(color='white', size=15), bgcolor='darkblue', bordercolor='black')
+        hoverlabel=dict(font=dict(color='#0b2d39', family="Inter", size=15))
     )
 
     return fig
@@ -78,40 +78,40 @@ def age_graph():
     )
 
     fig.update_layout(
+    xaxis_title=None,
+    yaxis_title=None,
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)'
-    )
+    plot_bgcolor='rgba(0,0,0,0)',
+    hoverlabel=dict(font=dict(color='#0b2d39', family="Inter", size=15)),
+    yaxis=dict(
+        showline=True,
+        linecolor='grey',
+        ticks="outside") 
+        ),
+    
 
-    return fig  # Return the figure instead of showing it
+    return fig  
 
 
 
 gender_chart = gender_graph()  # Call the function and get the dict
 age_graph = age_graph()
 
-# with tgb.Page() as gender_age: #page_name
-#     with tgb.part(class_name="container card stack-large overview-page"):
-#         tgb.navbar()
-#         tgb.text("# Demografisk översikt: Kön och ålder", mode="md")
-#         with tgb.layout(columns="2 1"):
-#             with tgb.part(class_name="card"):
-#                 tgb.chart(figure = '{gender_chart}')
-#                 tgb.chart(figure = '{age_graph}')
 
 
 with tgb.Page() as gender_age:  # page_name
     with tgb.part(class_name="container card stack-large overview-page"):
         tgb.navbar()
 
-        tgb.text("## Demografisk översikt: Kön och ålder", mode="md")
+        tgb.text("## Demografisk översikt: Kön och ålder ", mode="md")
         with tgb.part(class_name="card"):
             tgb.text(
-                "## Men vs Women Applicants per Education Field (2023 & 2024) - Top 10", mode="md")
+                "## Män vs. Kvinnor som sökt per utbildningsområde (2023 & 2024) – Topp 10", mode="md")
             tgb.chart(figure='{gender_chart}')
 
         with tgb.part(class_name="card"):
             tgb.text(
-                "## Utbildningsansökningar 2024: Kvinnor vs. Män per åldersgrupp\n"
+                "## Män vs. Kvinnor per åldersgrupp (2022-2024)\n"
                 "Detta diagram visar könsfördelningen bland utbildningsansökningar uppdelat på olika åldersgrupper.\n"
                 "X-axeln representerar de olika åldersgrupperna, medan Y-axeln visar antal inkomna ansökningar.\n"
                 "Färgerna visualiserar kön: **ljusblå för kvinnor** och **grå för män**.",
