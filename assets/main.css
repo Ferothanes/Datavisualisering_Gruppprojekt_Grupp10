@@ -1,5 +1,5 @@
-@import "layout_primitives.css";
 @import "styles.css";
+@import "layout_primitives.css";
 
 
 h1 {
@@ -15,24 +15,6 @@ p {
 }
 
 
-/* .overview-page.container {
-  width: 70%;
-  box-sizing: border-box;
-}
-
-
-.overview-page .card {
-  width: 100%;
-  max-width: 100%;
-}
-
-.overview-page .plot-container {
-  width: 50%;
-} */
-
-/* .overview-page .taipy-text{
-  text-align:center
-}  */
 
 
 /* HOME PAGE */
