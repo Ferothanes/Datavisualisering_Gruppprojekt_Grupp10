@@ -74,7 +74,7 @@ def age_graph():
         color="Gender",
         barmode="group",
         labels={"Applications": "Antal ansökningar"},
-        color_discrete_map={"Women": "lightblue", "Men": "grey"}
+        color_discrete_map={"Women": "#BBE5EF", "Men": "#8F9FA6"}
     )
 
     fig.update_layout(
@@ -117,3 +117,6 @@ with tgb.Page() as gender_age:  # page_name
                 "Färgerna visualiserar kön: **ljusblå för kvinnor** och **grå för män**.",
                 mode="md")
             tgb.chart(figure='{age_graph}')
+
+        with tgb.part(class_name="card"):
+            tgb.image("assets/images/storytelling_aldergrupp.png", width="1000px")

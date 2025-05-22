@@ -5,8 +5,17 @@ import plotly.express as px
 
 def student_area_graph():
     df = pd.read_excel("data/Antalet studerande i YH inom olika utbildningsområden 2012-2024.xlsx")
-
     df_long = df.melt(id_vars='År', var_name='Utbildningsområde', value_name='Antal studerande')
+
+    blue_colors = [
+        "#057DA8", 
+        "#39B8E4",  
+        "#839CF1",  
+        "#667fd2",
+        "#2141ab",
+        "#61BDB3",
+        "#27C557"
+    ]
 
     fig = px.line(
         df_long,
@@ -14,7 +23,8 @@ def student_area_graph():
         y='Antal studerande',
         color='Utbildningsområde',
         labels={'År': 'År', 'Antal studerande': 'Antal studerande'},
-        template='plotly_white'
+        template='plotly_white',
+        color_discrete_sequence = blue_colors # Bättre färger än default 
     )
 
     # Visade linjer vid start
@@ -25,12 +35,10 @@ def student_area_graph():
         "Data/It"
     ]
 
-    # Set color for all lines and markers and manage visibility
+    # Show the four areas by default, others hidden in legend onl
     for trace in fig.data:
         #trace.mode = "lines+markers"
-        trace.line.color = '#23afe0'      # set line color
-        #trace.marker.color = '#51abcb'    # set marker color
-        if trace.name in visible_areas: # Show the four areas by default, others hidden in legend onl
+        if trace.name in visible_areas: 
             trace.visible = True
         else:
             trace.visible = "legendonly"
