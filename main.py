@@ -4,9 +4,10 @@ from frontend.pages.utbildningsomrade import utbildningsomrade
 from frontend.pages.statistikansökningar import ansökningar
 from frontend.pages.Overview import gender_age
 from frontend.pages.home import home_page
+from frontend.pages.anordnare import anordnare
 
 #pages = {"home": home_page, "dashboard": dashboard_page, "data": data_page}
-pages = {"Home": home_page, "Educations": utbildningsomrade, "statistikansokningar": ansökningar, "Overview": gender_age}
+pages = {"Home": home_page, "Kursansokningar": ansökningar, "Utbildningsomraden": utbildningsomrade, "Demografi": gender_age, "Anordnare":anordnare}
 
 
 if __name__ == "__main__":
