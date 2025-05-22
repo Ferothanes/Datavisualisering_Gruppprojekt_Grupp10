@@ -15,30 +15,27 @@ p {
 }
 
 
-.overview-page.container {
-  /*max-width: 100% !important;*/
+/* .overview-page.container {
   width: 70%;
   box-sizing: border-box;
 }
 
-/* Make the card inside it also fill the full width */
+
 .overview-page .card {
   width: 100%;
   max-width: 100%;
 }
 
-/* .taipy-text h1 {color: tomato;} */
-
 .overview-page .plot-container {
   width: 50%;
-
-}
+} */
 
 /* .overview-page .taipy-text{
   text-align:center
 }  */
 
 
+/* HOME PAGE */
 .home-page .taipy-image {
   position: absolute;
   top: 0;
@@ -47,7 +44,9 @@ p {
 }
 
 
-/* NAVBAR CSS */
+
+/* FOR ALL PAGES  */
+/* ----------------NAVBAR colors.----------------------------- */
 .MuiTabs-flexContainer button.Mui-selected {
   color: #51abcb; /* text color for active tab */
   /* background-color: white; background color for active tab */
@@ -55,5 +54,17 @@ p {
 }
 .MuiTabs-indicator {
   background-color: #51abcb;
+}
+
+
+/* --------------Dropdownbox colors---------------------------- */
+/* Default border color */
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #51abcb;
+  border-radius: 5px;
+}
+/* Border color when the Select is focused */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #51abcb;
 }
 
