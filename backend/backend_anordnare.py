@@ -1,6 +1,8 @@
 import pandas as pd
 import sys
 from pathlib import Path
+from backend.get_statsbidrag import count_statsbidrag
+
 
 # Lägg till projektroten till sys.path
 sys.path.append(str(Path(__file__).resolve().parents[1]))
@@ -56,10 +58,12 @@ def update_kpi(state):
     beviljade, ej_beviljade = count_beslut(df_an, state.selected_anordnare, state.selected_year)
     state.beviljade = beviljade
     state.ej_beviljade = ej_beviljade
+    
     #-- Utbildningsområden 
     utbildningsområden = get_utbildningsområden(df_an, state.selected_anordnare, state.selected_year)
     state.utbildningsområden = utbildningsområden
     state.utbildningsområden_text = ", ".join(utbildningsområden)
+    
     #-- Procent andel av sökta
     total = beviljade + ej_beviljade
     if total > 0:
@@ -67,9 +71,11 @@ def update_kpi(state):
     else:
         state.beviljandegrad = 0.0
 
+    #-- Statsbidrag
+    state.statsbidrag_mkr = count_statsbidrag(state.selected_anordnare, state.selected_year)
+
 
 #-----Räkna beslut 
-
 def count_beslut(df, anordnare, år):
     df_filtered = df[
         (df["Utbildningsanordnare administrativ enhet"] == anordnare) &
@@ -83,7 +89,6 @@ def count_beslut(df, anordnare, år):
 
 
 #-------- Få ut utbildningsområden
-
 def get_utbildningsområden(df, anordnare, år):
     df_filtered = df[
         (df["Utbildningsanordnare administrativ enhet"] == anordnare) &
