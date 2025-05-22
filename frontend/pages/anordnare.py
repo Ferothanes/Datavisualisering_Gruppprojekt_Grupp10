@@ -26,40 +26,42 @@ statsbidrag_mkr = count_statsbidrag(selected_anordnare, selected_year)
 
 # Bygg GUI
 with tgb.Page() as anordnare:
-    tgb.navbar()
+    with tgb.part(class_name="container card stack-large anordnare-page"):
+        tgb.navbar()
+            
 
-    # Filtrera
-    with tgb.part(class_name="card centered"):
-        tgb.text("## Filtrera utbildningsanordnare", mode="md")
-        tgb.selector("Anordnare", value="{selected_anordnare}", lov=sorted(df_an["Utbildningsanordnare administrativ enhet"].dropna().astype(str).unique()), dropdown=True)
-        tgb.selector("År", value="{selected_year}", lov="{selected_year_lov}", dropdown=True)
-        tgb.button("Visa statistik", on_action=update_kpi)
+        # Filtrera
+        with tgb.part(class_name="card centered"):
+            tgb.text("## Filtrera utbildningsanordnare", mode="md")
+            tgb.selector("Anordnare", value="{selected_anordnare}", lov=sorted(df_an["Utbildningsanordnare administrativ enhet"].dropna().astype(str).unique()), dropdown=True)
+            tgb.selector("År", value="{selected_year}", lov="{selected_year_lov}", dropdown=True)
+            tgb.button("Visa statistik", on_action=update_kpi, class_name="filled-button")
 
-    # KPI-sektion
-    with tgb.part(class_name="card centered"):
-        tgb.text("## KPI:er för {selected_anordnare} - år {selected_year_str}", mode="md")
-        tgb.text("{selected_anordnare} har ansökt om att bedriva utbildningar på följande platser:")
-        tgb.text("Kommun(er): {kommuner}")
-        tgb.text("Län: {län}")
-        tgb.text("Ägartyp: {huvudmannatyp}", class_name="kpi")
+        # KPI-sektion
+        with tgb.part(class_name="card centered"):
+            tgb.text("## KPI:er för {selected_anordnare} - år {selected_year_str}", mode="md")
+            tgb.text("**{selected_anordnare} har ansökt om att bedriva utbildningar på följande platser:**", mode="md")
+            tgb.text("**Kommun(er):** {kommuner}", mode="md")
+            tgb.text("**Län:** {län}", mode="md")
 
-    # Ansökningar
-    with tgb.part(class_name="card centered"):
-        tgb.text("#### Ansökningar:", mode="md")
-        tgb.text("{beviljade} Stycken beviljade", class_name="kpi")
-        tgb.text("{ej_beviljade} Stycken ej beviljade", class_name="kpi")
+        # Ansökningar
+        with tgb.part(class_name="card centered"):
+            tgb.text("#### Ansökningar:", mode="md")
+            tgb.text("**{beviljade} Stycken beviljade**", class_name="kpi", mode="md")
+            tgb.text("**{ej_beviljade} Stycken ej beviljade**", class_name="kpi", mode="md")
 
-    # Utbildningsområden
-    with tgb.part(class_name="card centered"):
-        tgb.text("#### Beviljade utbildningsområden:", mode="md")
-        tgb.text("{utbildningsområden_text}", class_name="kpi")
+        # Utbildningsområden
+        with tgb.part(class_name="card centered"):
+            tgb.text("#### Beviljade utbildningsområden:", mode="md")
+            tgb.text("**{utbildningsområden_text}**", class_name="kpi", mode="md")
 
-    # Statistik
-    with tgb.part(class_name="card centered"):
-        tgb.text("## Statistik:", mode="md")
-        tgb.text("{beviljandegrad}% beviljandegrad", class_name="kpi")
-        tgb.text("Erhöll {statsbidrag_mkr} miljoner kronor i statliga medel", class_name="kpi")
-        tgb.text("Erhöll {poäng} beviljade poäng", class_name="kpi")
+        # Statistik
+        with tgb.part(class_name="card centered"):
+            tgb.text("## Statistik:", mode="md")
+            tgb.text("**Ägartyp:** {huvudmannatyp}", class_name="kpi", mode="md")
+            tgb.text("**{beviljandegrad}% Beviljandegrad för sina ansökningar**", class_name="kpi", mode="md")
+            tgb.text("**Erhöll {statsbidrag_mkr} miljoner kronor i statliga medel**", class_name="kpi", mode="md")
+            tgb.text("**Erhöll {poäng} beviljade poäng**", class_name="kpi", mode="md")
 
 # Kör app
 if __name__ == "__main__":
