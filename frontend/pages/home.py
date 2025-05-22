@@ -3,7 +3,7 @@ import taipy.gui.builder as tgb
 with tgb.Page() as home_page:
     with tgb.part(class_name="container card stack-large home-page"):
         tgb.navbar()
-        tgb.image("assets/images/logo.png", width="200px") 
+        tgb.image("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM200Z3Nya3QwZ2p2Nnk0NmVhb2ZuMWxmejdnY3V0dmt3aGRzejUwcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Vf3ZKdillTMOOaOho0/giphy.gif", width="200px") 
 
         with tgb.part(class_name="max-text-width"):
 
