@@ -9,9 +9,11 @@ import taipy.gui.builder as tgb
 
 # ======= Filvägar =======
 
-DATA_PATH = Path("C:/Users/Brukare/OneDrive - sti.se/Skrivbordet/github/Datavisualisering_Gruppprojekt_Grupp10/data/sammanfogad_kurser_inom_yh_2020-2024.xlsx")
-GEO_PATH = Path("C:/Users/Brukare/OneDrive - sti.se/Skrivbordet/github/Datavisualisering_Gruppprojekt_Grupp10/assets/swedish_regions.geojson")
+DATA_PATH = Path("data/sammanfogad_kurser_inom_yh_2020-2024.xlsx")
+GEO_PATH = Path("data/swedish_regions.geojson")
 fig_map = go.Figure()
+
+
 
 def load_map_data():
     global fig_map
@@ -79,7 +81,6 @@ def load_map_data():
         width=800,
         height=700,
         title={
-            "text": "Beviljade YH-kurser per län (2024)",
             "x": 0.5,
             "font": dict(size=22, color="#050505", family="Arial, sans-serif")
         },
@@ -94,7 +95,7 @@ load_map_data()
 with tgb.Page() as map_page:
     with tgb.part(class_name="container card"):
         tgb.navbar()
-        tgb.text("## Karta över beviljade YH-kurser per län", mode="md")
+        tgb.text("## Karta över beviljade YH-kurser per län (2024)", mode="md")
         with tgb.layout(columns="70% 30%"):  # karta till vänster, text till höger
             tgb.chart(figure="{fig_map}")
             tgb.text("""
