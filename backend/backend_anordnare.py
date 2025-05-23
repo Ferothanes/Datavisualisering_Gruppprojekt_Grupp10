@@ -11,7 +11,7 @@ from utils.constants import DATA_DIRECTORY
 df_an = pd.read_excel(DATA_DIRECTORY / "resultat_ansokning_program_2020-2024.xlsx")
 df_an["År"] = df_an["År"].astype(str).str.replace(",", "").astype(int)
 
-# Hämtar KPI-värden för viss anordnare och år
+# --Hämtar data för anordnare och år
 def get_anordnare(df, anordnare, år):
     df_filtered = df[
         (df["Utbildningsanordnare administrativ enhet"] == anordnare)
@@ -65,16 +65,19 @@ def update_kpi(state):
 
     state.statsbidrag_mkr = count_statsbidrag(state.selected_anordnare, state.selected_year)
 
-# Räkna antal beviljade/ej beviljade
+
+# -- För att kunna få ut beviljade/obeviljade ansökningar
 def count_beslut(df, anordnare, år):
     df_filtered = df[
         (df["Utbildningsanordnare administrativ enhet"] == anordnare) &
         (df["År"] == år)
     ]
-    beslut_counts = df_filtered["Beslut"].value_counts().to_dict()
-    return beslut_counts.get("Beviljad", 0), beslut_counts.get("Ej beviljad", 0)
+    beviljade = df_filtered[df_filtered["Beslut"] == "Beviljad"].shape[0]
+    ej_beviljade = df_filtered[df_filtered["Beslut"] != "Beviljad"].shape[0]
+    return beviljade, ej_beviljade
 
-# Hämta utbildningsområden
+
+# -- Hämta utbildningsområden
 def get_utbildningsområden(df, anordnare, år):
     df_filtered = df[
         (df["Utbildningsanordnare administrativ enhet"] == anordnare)
