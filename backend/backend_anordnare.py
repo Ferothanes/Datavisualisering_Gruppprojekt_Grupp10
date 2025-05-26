@@ -20,28 +20,43 @@ def get_anordnare(df, anordnare, år):
 
     poäng = df_filtered[df_filtered["Beslut"] == "Beviljad"]["YH-poäng"].sum()
 
+    # kommuner_lista = df_filtered["Kommun"].dropna().unique()
+    # kommuner_rensade = sorted([k for k in kommuner_lista if "flera" not in k.lower()])
+    # kommuner = ", ".join(kommuner_rensade) if kommuner_rensade else "Okänt"
+
+    #-- Kommuner, bort med Nans och dubltter
     kommuner_lista = df_filtered["Kommun"].dropna().unique()
-    kommuner_rensade = sorted([k for k in kommuner_lista if "flera" not in k.lower()])
+    kommuner_rensade = sorted(kommuner_lista)
     kommuner = ", ".join(kommuner_rensade) if kommuner_rensade else "Okänt"
 
+
+    # län_lista = df_filtered["Län"].dropna().unique()
+    # län_rensade = sorted([l for l in län_lista if "flera" not in l.lower()])
+    # län = ", ".join(län_rensade) if län_rensade else "Okänt"
+
+    #--Län
     län_lista = df_filtered["Län"].dropna().unique()
-    län_rensade = sorted([l for l in län_lista if "flera" not in l.lower()])
+    län_rensade = sorted(län_lista)
     län = ", ".join(län_rensade) if län_rensade else "Okänt"
+
 
     huvudmannatyp = df_filtered["Huvudmannatyp"].iloc[0] if not df_filtered.empty else "Okänd"
 
     return poäng, kommuner, län, huvudmannatyp
 
-# Uppdaterar alla KPI:er baserat på state
+# Uppdaterar alla KPI:er baserat på klicka statstik/state
 def update_kpi(state):
     print("Vald anordnare:", state.selected_anordnare)
 
+    # Selekterar/skriver ut anorndare/år i dropdownen
     år_för_anordnare = df_an[
         df_an["Utbildningsanordnare administrativ enhet"] == state.selected_anordnare
     ]["År"].unique()
     år_för_anordnare = sorted([int(år) for år in år_för_anordnare], reverse=True)
     state.selected_year_lov = år_för_anordnare
 
+
+    # Säkerställer att selected year inte kraschar 
     if state.selected_year not in år_för_anordnare:
         state.selected_year = år_för_anordnare[0]
 
@@ -49,6 +64,7 @@ def update_kpi(state):
     state.poäng = poäng
     state.kommuner = kommuner
     state.län = län
+    #-- Få utskrivet selekterat år i sträng
     state.selected_year_str = str(state.selected_year)
     state.huvudmannatyp = huvudmannatyp
 
@@ -63,7 +79,7 @@ def update_kpi(state):
     total = beviljade + ej_beviljade
     state.beviljandegrad = round(beviljade / total * 100, 1) if total > 0 else 0.0
 
-    state.statsbidrag_mkr = count_statsbidrag(state.selected_anordnare, state.selected_year)
+    # state.statsbidrag_mkr = count_statsbidrag(state.selected_anordnare, state.selected_year)
 
 
 # -- För att kunna få ut beviljade/obeviljade ansökningar
@@ -84,7 +100,7 @@ def get_utbildningsområden(df, anordnare, år):
         & (df["År"] == år)
         & (df["Beslut"] == "Beviljad")
     ]
-    return sorted(df_filtered["Utbildningsområde"].dropna().unique().tolist())
+    return (df_filtered["Utbildningsområde"].dropna().unique().tolist())
 
 
 
