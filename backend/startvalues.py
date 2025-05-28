@@ -2,6 +2,8 @@ from backend.backend_anordnare import (
     get_anordnare,
     count_beslut,
     get_utbildningsområden,
+    fig_top_10_sökta, 
+    fig_top_10_beviljade
 )
 
 #---  Skapar Startvärden för dashboarden
@@ -17,6 +19,9 @@ def get_start_values(df):
     utbildningsområden_text = ", ".join(utbildningsområden)
     beviljandegrad = round(beviljade / (beviljade + ej_beviljade) * 100, 1) if (beviljade + ej_beviljade) > 0 else 0.0
 
+    fig_sökta = fig_top_10_sökta(df, selected_year)
+    fig_beviljade = fig_top_10_beviljade(df, selected_year)
+
     return {
         "selected_anordnare": selected_anordnare,
         "selected_year": selected_year,
@@ -31,7 +36,8 @@ def get_start_values(df):
         "beviljade": beviljade,
         "ej_beviljade": ej_beviljade,
         "beviljandegrad": beviljandegrad,
-        # "statsbidrag_mkr": count_statsbidrag(selected_anordnare, selected_year),
+        "fig_top_10_sökta": fig_sökta,
+        "fig_top_10_beviljade": fig_beviljade,
     }
 
     

@@ -1,7 +1,6 @@
 import pandas as pd
 import sys
 from pathlib import Path
-from backend.get_statsbidrag import count_statsbidrag
 import frontend.pages.anordnare as anordnare_gui
 
 # Lägg till projektroten till sys.path
@@ -79,8 +78,6 @@ def update_kpi(state):
     #-  Botten KPIer för sökningar
     state.fig_top_10_sökta = fig_top_10_sökta(df_an, state.selected_year)
     state.fig_top_10_beviljade = fig_top_10_beviljade(df_an, state.selected_year)
-
-    # state.statsbidrag_mkr = count_statsbidrag(state.selected_anordnare, state.selected_year)
 
 
 # -- För att kunna få ut beviljade/obeviljade ansökningar
