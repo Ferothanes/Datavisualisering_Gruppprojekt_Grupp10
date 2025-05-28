@@ -34,3 +34,4 @@ def get_start_values(df):
         # "statsbidrag_mkr": count_statsbidrag(selected_anordnare, selected_year),
     }
 
+    
