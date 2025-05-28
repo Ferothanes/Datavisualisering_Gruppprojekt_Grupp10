@@ -30,10 +30,10 @@ huvudmannatyp = start_values["huvudmannatyp"]
 beviljade = start_values["beviljade"]
 ej_beviljade = start_values["ej_beviljade"]
 beviljandegrad = start_values["beviljandegrad"]
-# statsbidrag_mkr = start_values.get("statsbidrag_mkr", 0)
 
-fig_top_10_sökta = None
-fig_top_10_beviljade = None
+
+fig_top_10_sökta = start_values["fig_top_10_sökta"]
+fig_top_10_beviljade = start_values["fig_top_10_beviljade"]
 
 #-- Bygger dashboarden
 with tgb.Page() as anordnare:
@@ -63,8 +63,8 @@ with tgb.Page() as anordnare:
         with tgb.part(class_name="card center-text"):
             tgb.text("## Information gällande {selected_anordnare} - år {selected_year_str}", mode="md")
             tgb.text("**{selected_anordnare} har ansökt om att bedriva utbildningar på följande platser:**", mode="md")
-            tgb.text("**Kommun(er):** {kommuner}", mode="md")
-            tgb.text("**Län:** {län}", mode="md")
+            tgb.text("**Kommun(er): {kommuner}**", mode="md")
+            tgb.text("**Län: {län}**", mode="md")
 
         with tgb.part(class_name="card center-text"):
             tgb.text("## Ansökningar:", mode="md")
@@ -79,7 +79,7 @@ with tgb.Page() as anordnare:
 
         with tgb.part(class_name="card center-text"):
             tgb.text("## Statistik:", mode="md")
-            tgb.text("**Ägartyp:** {huvudmannatyp}", class_name="kpi", mode="md")
+            tgb.text("**Ägartyp: {huvudmannatyp}**", class_name="kpi", mode="md")
             tgb.text("**{beviljandegrad}% Beviljandegrad för sina ansökningar**", class_name="kpi", mode="md")
             tgb.text("**Erhöll {poäng} beviljade poäng**", class_name="kpi", mode="md")
 
