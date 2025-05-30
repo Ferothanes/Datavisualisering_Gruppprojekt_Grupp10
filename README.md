@@ -1,3 +1,5 @@
+Starta dashboarden genom att köra main.py
+
 # Datavisualisering_Gruppprojekt
 
 - git branch              # List local branches
